@@ -35,20 +35,20 @@ const pies = [
       instructor: 'callan',
       iceCream: 'none',
     },
-  ];
+];
 
-  const printToDom = (divId, stringToPrint) => {
-      document.getElementById(divId).innerHTML = stringToPrint;
-  }
+const printToDom = (divId, stringToPrint) => {
+    document.getElementById(divId).innerHTML = stringToPrint;
+}
 
-  const cardBuilder = (pieArr) => {
-      let domString = '<div class="row">';
-      for (let i = 0; i < pieArr.length; i++) {
-          const currentPie = pieArr[i];
-          //domString += `<h1></h1>`
-          domString += `
-          <div class="col-3">
-          <div class="card">
+const cardBuilder = (pieArr) => {
+    let domString = '<div class="row">';
+    for (let i = 0; i < pieArr.length; i++) {
+        const currentPie = pieArr[i];
+        //domString += `<h1></h1>`
+        domString += `
+        <div class="col-3">
+        <div class="card">
             <img src="${currentPie.imageUrl}" class="card-img-top img-fluid" alt="...">
             <div class="card-body">
                 <h5 class="card-title">${currentPie.name}</h5>
@@ -57,9 +57,27 @@ const pies = [
         </div>
         </div>
         `;
-      }
-      domString += '<\div>'
-      printToDom("pie-zone", domString);
-  }
+    }
+    domString += '<\div>'
+    printToDom("pie-zone", domString);
+}
 
+const buttonClick = (e) => {
+    const instructorName = e.target.id;
+    const selectedPies = [];
+    for (i = 0; i < pies.length; i++) {
+        if (pies[i].instructor === instructorName) {
+            selectedPies.push(pies[i]);
+        }
+    }
+    cardBuilder(selectedPies);
+}
+
+document.getElementById('zoe').addEventListener('click', buttonClick);
+document.getElementById('callan').addEventListener('click', buttonClick);
+document.getElementById('michael').addEventListener('click', buttonClick);
+document.getElementById('all').addEventListener('click', () => {
+    cardBuilder(pies);
+});
+  
   cardBuilder(pies);
